@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 import static io.qameta.allure.Allure.step;
 
-public class ExampleTestClass {
+public class ExampleTestClassTestNG {
 
     @DataProvider
     public Iterator<Object[]> test1Provider() {
@@ -20,14 +20,16 @@ public class ExampleTestClass {
     }
 
     @Test(description = "Параметризированный тест", dataProvider = "test1Provider")
-    public void exampleTest_1_v1(String arg) {
+    public void exampleTest_1_v1(String arg) throws InterruptedException {
+        Thread.sleep(2000);
         step("Шаг теста", () -> {
             //Происходит магия
         });
     }
 
     @Test(description = "Простой тест")
-    public void exampleTest_2_v1() {
+    public void exampleTest_2_v1() throws InterruptedException {
+        Thread.sleep(2000);
         step("Шаг теста", () -> {
             //Происходит магия
         });
