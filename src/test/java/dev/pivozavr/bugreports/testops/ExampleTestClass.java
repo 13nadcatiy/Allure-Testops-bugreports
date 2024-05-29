@@ -1,6 +1,7 @@
 package dev.pivozavr.bugreports.testops;
 
 import dev.pivozavr.bugreports.testops.utils.DataProviderBuilder;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -19,19 +20,15 @@ public class ExampleTestClass {
                 .getIterator();
     }
 
+    static int variationCount = 3;
+
     @Test(description = "Параметризированный тест", dataProvider = "test1Provider")
     public void exampleTest_1_v1(String arg) {
-        step("Шаг теста", () -> {
-            //Происходит магия
+        if (variationCount != 0)
+            variationCount--;
+        step("Проверка", () -> {
+            Assert.assertTrue(variationCount == 0, "Тест должен пройти  успешно только на 3й раз");
         });
+
     }
-
-    @Test(description = "Простой тест")
-    public void exampleTest_2_v1() {
-        step("Шаг теста", () -> {
-            //Происходит магия
-        });
-    }
-
-
 }
