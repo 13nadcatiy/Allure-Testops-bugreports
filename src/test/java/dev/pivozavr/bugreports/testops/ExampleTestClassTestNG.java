@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 import static io.qameta.allure.Allure.step;
 
-public class ExampleTestClass {
+public class ExampleTestClassTestNG {
 
     @DataProvider
     public Iterator<Object[]> test1Provider() {
@@ -22,10 +22,10 @@ public class ExampleTestClass {
 
     static int variationCount = 3;
 
-    @Test(description = "Параметризированный тест", dataProvider = "test1Provider")
-    public void exampleTest_1_v1(String arg) {
-        if (variationCount != 0)
-            variationCount--;
+    @Test(description = "Параметризированный тест (заканчивается успешно только в последней итерации)", dataProvider = "test1Provider")
+    public void exampleTest_1_v1(String arg) throws InterruptedException {
+        Thread.sleep(2000);
+        variationCount--;
         step("Проверка", () -> {
             Assert.assertTrue(variationCount == 0, "Тест должен пройти  успешно только на 3й раз");
         });
