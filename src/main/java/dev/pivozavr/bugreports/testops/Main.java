@@ -1,4 +1,4 @@
-package dev.pivozavrus.bugreports.testops;
+package dev.pivozavr.bugreports.testops;
 
 public class Main {
     public static void main(String[] args) {

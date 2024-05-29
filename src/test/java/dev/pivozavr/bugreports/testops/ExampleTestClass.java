@@ -1,4 +1,4 @@
-package dev.pivozavrus.bugreports.testops;
+package dev.pivozavr.bugreports.testops;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
