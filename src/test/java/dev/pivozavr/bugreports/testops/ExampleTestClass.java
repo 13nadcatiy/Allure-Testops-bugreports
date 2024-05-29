@@ -16,7 +16,8 @@ class ExampleTestClass {
     @DisplayName("Параметризированный тест (заканчивается успешно только в последней итерации)")
     @ParameterizedTest(name = "{displayName} ({argumentsWithNames})")
     @ValueSource(strings = {"test1", "test2", "test3"})
-    public void exampleTest_1_v1(String arg) {
+    public void exampleTest_1_v1(String arg) throws InterruptedException {
+        Thread.sleep(2000);
         variationCount--;
         step("Проверка", () -> {
             Assertions.assertEquals(0, variationCount, "Тест должен пройти  успешно только на 3й раз");
