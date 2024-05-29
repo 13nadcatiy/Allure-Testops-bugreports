@@ -3,7 +3,6 @@ package dev.pivozavr.bugreports.testops;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,15 +23,4 @@ class ExampleTestClass {
             Assertions.assertEquals(3, tryCount, "Тест пройдет успешно только в последней итерации");
         });
     }
-
-    @Tag("voronin-test")
-    @Test
-    @DisplayName("Параметризированный тест")
-    public void exampleTest_2_v1() {
-        step("Шаг теста", () -> {
-            //Происходит магия
-        });
-    }
-
-
 }
