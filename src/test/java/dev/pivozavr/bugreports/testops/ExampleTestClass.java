@@ -29,6 +29,5 @@ public class ExampleTestClass {
         step("Проверка", () -> {
             Assert.assertTrue(variationCount == 0, "Тест должен пройти  успешно только на 3й раз");
         });
-
     }
 }
