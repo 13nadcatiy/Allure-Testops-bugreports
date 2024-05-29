@@ -12,29 +12,21 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.jupiter.version>5.10.0</junit.jupiter.version>
+        <testng.version>7.4.0</testng.version>
         <allure.version>2.15.0</allure.version>
         <aspectj.version>1.9.19</aspectj.version>
     </properties>
+
     <dependencies>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.jupiter.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit5</artifactId>
+            <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
         </dependency>
         <dependency>
@@ -84,13 +76,8 @@
                     </argLine>
                     <properties>
                         <configurationParameters>
-                            junit.jupiter.testinstance.lifecycle.default = per_class
-                            junit.jupiter.execution.parallel.enabled = true
-                            junit.jupiter.execution.parallel.mode.default = same_thread
-                            junit.jupiter.execution.parallel.mode.classes.default = concurrent
-                            junit.jupiter.execution.parallel.config.strategy = fixed
-                            junit.jupiter.execution.parallel.config.fixed.parallelism = ${threads}
-                            junit.jupiter.execution.parallel.config.fixed.max-pool-size = ${threads}
+                            testng.parallel = true
+                            testng.thread.count = ${threads}
                         </configurationParameters>
                     </properties>
                     <systemPropertyVariables>
@@ -134,5 +121,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
