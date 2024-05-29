@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static io.qameta.allure.Allure.step;
 
-class ExampleTestClass {
+class ExampleTestClassJUnit5 {
 
     static int variationCount = 3;
 
