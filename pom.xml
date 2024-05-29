@@ -13,14 +13,132 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.jupiter.version>5.8.1</junit.jupiter.version>
+        <allure.version>2.15.0</allure.version>
+        <junit-jupiter.version>5.10.0</junit-jupiter.version>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.jupiter.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.junit.platform</groupId>
+                    <artifactId>junit-platform-launcher</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-assertj</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-selenide</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-test-filter</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <groups>${tags}</groups>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <rerunFailingTestsCount>${rerunFailingTestsCount}</rerunFailingTestsCount>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <properties>
+                        <configurationParameters>
+                            junit.jupiter.testinstance.lifecycle.default = per_class
+                            junit.jupiter.execution.parallel.enabled = true
+                            junit.jupiter.execution.parallel.mode.default = same_thread
+                            junit.jupiter.execution.parallel.mode.classes.default = concurrent
+                            junit.jupiter.execution.parallel.config.strategy = fixed
+                            junit.jupiter.execution.parallel.config.fixed.parallelism = ${threads}
+                            junit.jupiter.execution.parallel.config.fixed.max-pool-size = ${threads}
+                        </configurationParameters>
+                    </properties>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <allure.report.directory>${project.build.directory}/surefire-reports</allure.report.directory>
+                        <env>${env}</env>
+                        <lsnext>${lsnext}</lsnext>
+                        <squad>${squad}</squad>
+                        <lsNode>${lsNode}</lsNode>
+                        <prodUserCommonPassword>${prodUserCommonPassword}</prodUserCommonPassword>
+                        <prodUserPaymentsPassword>${prodUserPaymentsPassword}</prodUserPaymentsPassword>
+                        <prodUserPrivilegePassword>${prodUserPrivilegePassword}</prodUserPrivilegePassword>
+                        <prodUserLsNextPaymentsPassword>${prodUserLsNextPaymentsPassword}
+                        </prodUserLsNextPaymentsPassword>
+                        <prodUserWithoutIdentificationPassword>${prodUserWithoutIdentificationPassword}
+                        </prodUserWithoutIdentificationPassword>
+                        <prodUserAbTestPassword>${prodUserAbTestPassword}</prodUserAbTestPassword>
+                        <hosts.mobsite>${hosts.mobsite}</hosts.mobsite>
+                        <hosts.lsapi>${hosts.lsapi}</hosts.lsapi>
+                        <hosts.ldsapi>${hosts.ldsapi}</hosts.ldsapi>
+                        <wheelOfFortune>${wheelOfFortune}</wheelOfFortune>
+                        <amplitudeAuthKey>${amplitudeAuthKey}</amplitudeAuthKey>
+                        <amplitudeAuthKeyProd>${amplitudeAuthKeyProd}</amplitudeAuthKeyProd>
+                        <newUsersCount>${newUsersCount}</newUsersCount>
+                        <innerUser>${innerUser}</innerUser>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
+                <configuration>
+                    <reportVersion>2.14.0</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
