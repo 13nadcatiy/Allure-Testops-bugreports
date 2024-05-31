@@ -42,7 +42,8 @@ class ExampleTestClassJUnit5 {
         Thread.sleep(2000);
         variationCount--;
         step(String.format("Проверка с параметрами \"%s\" и \"%s\"", param1, param2), () -> {
-            Assertions.assertEquals(0, variationCount, "Тест должен пройти  успешно только на 3й раз. Сейчас прогон " + (3 - variationCount));
+            Assertions.assertEquals(0, variationCount,
+                    "Тест должен пройти  успешно только на 3й раз. Сейчас прогон " + (3 - variationCount));
         });
     }
 }
