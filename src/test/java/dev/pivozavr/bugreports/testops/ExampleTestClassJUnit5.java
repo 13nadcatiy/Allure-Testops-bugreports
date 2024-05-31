@@ -33,6 +33,17 @@ class ExampleTestClassJUnit5 {
 
     static int variationCount = 3;
 
+    /**
+     * Добрый вечер, Павел
+     *
+     * У вас не правильно указана в коде параметризация, поэтому в тест кейсах параметры не передаются и прогон происходит ретраями.
+     *
+     * Прикладываю ссылку на инструкцию по параметризации:
+     * https://github.com/allure-framework/allure-java/issues/822#issuecomment-1253438899
+     *
+     * С уважением
+     * Яковлев В.
+     */
     @Tag("voronin-test")
     @DisplayName("Параметризированный тест (заканчивается успешно только в последней итерации)")
     @ParameterizedTest(name = "{displayName} ({argumentsWithNames})")
